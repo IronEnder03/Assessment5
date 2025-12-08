@@ -1,0 +1,3 @@
+T = readtable("stardewValleyData.csv");
+
+
