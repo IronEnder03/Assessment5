@@ -1,22 +1,20 @@
-function plotMagnitudeSpectrumHistogram(csvFileName)
-    % Load csvfile
-    x = readmatrix(stardewValleyData.csv);
-    x = x(:);   % ensure column vector
+function plotMagnitudeSpectrumHistogram()
+    T = readtable('stardewValleyData.csv');
 
-    % Compute FFT and magnitude
-    N = length(x);
-    X = fft(x);
-    magX = abs(X);
+    % Extract the numeric column (Players)
+    data = T.Players;
 
-    % Keep only positive frequencies
-    magX = magX(1:floor(N/2));
+    %Compute FFT
+    Y = fft(data);
 
-    % Plot histogram
+    %Compute magnitude spectrum
+    mag = abs(Y);
+
+    %Plot Histogram of Magnitude Spectrum
     figure;
-    histogram(magX, 'Normalization', 'pdf');
-    title('Magnitude Spectrum Histogram');
+    histogram(mag, 50);   % 50 bins; adjust if needed
+    title('Histogram of Magnitude Spectrum');
     xlabel('Magnitude');
-    ylabel('Probability Density');
+    ylabel('Frequency');
     grid on;
-
 end
