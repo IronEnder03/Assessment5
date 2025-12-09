@@ -1,20 +1,33 @@
-function plotMagnitudeSpectrumHistogram()
+function plotFullMagnitudeSpectrum()
     T = readtable('stardewValleyData.csv');
-
-    % Extract the numeric column (Players)
     data = T.Players;
-
-    %Compute FFT
+    
+    % Number of samples
+    N = length(data);
+    
+    % Sampling frequency (1 sample per hour)
+    fs = 1;  
+    
+    % FFT
     Y = fft(data);
-
-    %Compute magnitude spectrum
-    mag = abs(Y);
-
-    %Plot Histogram of Magnitude Spectrum
+    
+    % Shift zero frequency to center
+    Y_shifted = fftshift(Y);
+    
+    % Remove DC component (center)
+    Y_shifted(N/2 + 1) = 0;
+    
+    % Frequency axis for fftshifted data
+    f = (-N/2:N/2-1)*(fs/N);
+    
+    % Magnitude
+    mag = abs(Y_shifted);
+    
+    % Plot
     figure;
-    histogram(mag, 50);   % 50 bins; adjust if needed
-    title('Histogram of Magnitude Spectrum');
-    xlabel('Magnitude');
-    ylabel('Frequency');
+    plot(f, mag, 'LineWidth', 1.2);
+    title('Full Magnitude Spectrum (DC Removed)');
+    xlabel('Frequency (cycles/hour)');
+    ylabel('Magnitude');
     grid on;
 end
