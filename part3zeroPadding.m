@@ -2,19 +2,18 @@ T = readtable("stardewValleyData.csv");
 
 X = T.Players;
 
-L = length(X);
-n = 2^(nextpow2(L));
+N = length(X);
+N_padded = 2^(nextpow2(N));
 
-Y = fft(X, n);
+Y = fft(X, N_padded);
 
-Fs = 0.000277777778; % Sampling frequency in Hz
-f = Fs*(0:(n/2))/n;
-P2 = abs(Y/L);
-P1 = P2(1:n/2+1);
-P1(2:end-1) = 2*P1(2:end-1);
+Fs = 0.000277777778;
+f2 = Fs*(-N_padded/2:(N_padded/2-1))/N_padded;
+Y_shift = fftshift(Y);
+
 
 figure;
-plot(f,P1,"-o");
+plot(f2,abs(Y_shift));
 title("Single-Sided Spectrum of Padded Signal");
 xlabel("f (Hz)");
 ylabel("|P1(f)|");
