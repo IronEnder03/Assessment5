@@ -6,7 +6,7 @@ x = x(:);
 N = length(x);z
 
 fs = 1;       % adjust if needed
-fc = 0.05;     % cutoff frequency 
+fc = 0.01;     % cutoff frequency 
 
 freq = (-N/2 : N/2-1) * (fs/N);
 
@@ -48,6 +48,7 @@ for i = 1:length(freq)
 end
 
 end
+
 
 
 
