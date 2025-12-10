@@ -25,9 +25,19 @@ function plotFullMagnitudeSpectrum()
     
     % Plot
     figure;
-    plot(f, mag, 'LineWidth', 1.2);
-    title('Full Magnitude Spectrum (DC Removed)');
-    xlabel('Frequency (cycles/hour)');
+    bar(f, mag, 'LineWidth', 1.2);
+    title('Full Magnitude Spectrum');
+    xlabel('Frequency ');
     ylabel('Magnitude');
     grid on;
 end
+
+
+
+
+
+
+
+
+
+
