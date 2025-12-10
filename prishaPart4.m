@@ -3,7 +3,7 @@ data = readmatrix('stardewValleyData.csv');
 %% Load Data
 x = data(:,2);
 x = x(:);               
-N = length(x);
+N = length(x);z
 
 fs = 1;       % adjust if needed
 fc = 0.05;     % cutoff frequency 
@@ -48,6 +48,7 @@ for i = 1:length(freq)
 end
 
 end
+
 
 
 
