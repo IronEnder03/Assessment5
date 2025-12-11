@@ -3,23 +3,24 @@ data = readtable("stardewValleyData.csv");
 x = data.Players;
 N = length(x);
 Fs = 1;
-F_low = 0.01;
-F_high = 0.5;
+F_low = 0.1;
+F_high = ;
 
 H = ideal_bandpass(N, Fs, F_low, F_high);
 
 X = fft(x);
 X = fftshift(X);
 
-Y = X .* H';
+Y = X .* H;
 
 t = (0:N-1);
-y_filtered = ifft(ifftshift(Y));
-y_adjusted = real(y_filtered);
 
 figure;
 plot(t, x, 'b', 'LineWidth', 1.5); 
 hold on;
+
+y_filtered = ifft(ifftshift(Y));
+y_adjusted = real(y_filtered)+mean(x);
 
 plot(t, y_adjusted, 'r', 'LineWidth', 1.5);
 xlabel('Time');
@@ -35,7 +36,7 @@ function H = ideal_bandpass(N, sampling_freq, low_freq, high_freq)
     freq = (-N/2 : N/2-1) * (sampling_freq/N);
     
     for i = 1:N
-        if (abs(freq(i)) >= low_freq && abs(freq(i)) <= high_freq)
+        if (abs(freq(i)) > low_freq && abs(freq(i)) < high_freq)
             H(i) = 1;
         end
     end

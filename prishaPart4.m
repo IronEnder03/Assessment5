@@ -3,7 +3,7 @@ data = readmatrix('stardewValleyData.csv');
 %% Load Data
 x = data(:,2);
 x = x(:);               
-N = length(x);z
+N = length(x);
 
 fs = 1;       % adjust if needed
 fc = 0.01;     % cutoff frequency 
@@ -27,7 +27,7 @@ figure;
 plot(t, x, 'b', 'LineWidth', 1.5); 
 hold on;
 
-y_adjusted = real(y_filtered)+mean(x)
+y_adjusted = real(y_filtered)+mean(x);
 plot(t, y_adjusted, 'r', 'LineWidth', 1.5);
 legend('Original', 'High-Pass Filtered');
 xlabel('Time');
