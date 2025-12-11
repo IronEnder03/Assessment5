@@ -15,6 +15,6 @@ Y_shift_hann = fftshift(Y_hann);
 
 figure;
 plot(f2,abs(Y_shift_hann));
-title("Single-Sided Spectrum of Padded Signal");
+title("Hanning Window");
 xlabel("f (Hz)");
 ylabel("|P1(f)|");
